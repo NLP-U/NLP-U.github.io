@@ -6,7 +6,7 @@ tagline: SIG of the Applied Data Science focus area
 domain: nlp-u.github.io
 url: https://nlp-u.github.io
 github_username:  NLP-U
-logo: /assets/img/logo.jpeg
+logo: /assets/img/logo.png
 dateformat: "%b-%d-%Y"
 show_excerpts: true
 paginate: 5
