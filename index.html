@@ -1,0 +1,61 @@
+---
+layout: default
+---
+<div>
+  {% if page.title %}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {% endif %}
+
+  {% if site.paginate %}
+    {% assign posts = paginator.posts %}
+  {% else %}
+    {% assign posts = site.posts %}
+  {% endif %}
+
+  {% if posts.size > 0 %}
+    {% if page.list_title %}
+      <h2 class="post-list-heading">{{ page.list_title }}</h2>
+    {% endif %}
+    
+    <!-- This loops through the paginated posts -->
+    <ul class="post-list">
+      {% assign date_format = site.date_format | default: "%b %-d, %Y" %}
+      {% for post in posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: date_format }}</span>
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </h3>
+        {% if site.show_excerpts %}
+          <span class="post-excerpt">{{ post.excerpt }}</span>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+
+    <!-- Pagination links -->
+    {% if site.paginate %}
+      <div class="pager">
+        <ul class="pagination">
+        {% if paginator.previous_page %}
+          <li><a href="{{ paginator.previous_page_path | relative_url }}" class="previous-page">&#x003c&#x003c Previous</a></li>
+          <li><a href="{{ '/' | absolute_url }}" class="first-page">1</a></li>
+        {% endif %}
+        {% if paginator.page != paginator.total_pages %}
+          <li><div class="current-page">{{ paginator.page }}</div></li>
+        {% else %}
+          <li><div class="current-page">Last</div></li>
+        {% endif %}
+        {% if paginator.next_page %}
+          {% if paginator.next_page != paginator.total_pages %}
+          <li><a href="{{ paginator.next_page_path | relative_url }}" class="next-page">Next &#x003e&#x003e</a></li>
+          {% endif %}
+          <li><a href="{{ 'page' | append: paginator.total_pages | relative_url }}" class="last-page">Last</a></li>
+        {% endif %}
+        </ul>
+      </div>
+    {% endif %}
+  {% endif %}
+</div>
